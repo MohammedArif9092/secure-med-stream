@@ -17,12 +17,21 @@ import DoctorRecords from "./pages/doctor/DoctorRecords";
 
 // Patient pages
 import PatientDashboard from "./pages/patient/PatientDashboard";
+import PatientRecords from "./pages/patient/PatientRecords";
+import PatientPrescriptions from "./pages/patient/PatientPrescriptions";
+import PatientAppointments from "./pages/patient/PatientAppointments";
+import PatientHealth from "./pages/patient/PatientHealth";
+import PatientSettings from "./pages/patient/PatientSettings";
+import BookAppointment from "./pages/patient/BookAppointment";
 
 // Pharmacist pages
 import PharmacistDashboard from "./pages/pharmacist/PharmacistDashboard";
+import PharmacistVerify from "./pages/pharmacist/PharmacistVerify";
+import PharmacistInventory from "./pages/pharmacist/PharmacistInventory";
 
 // Admin pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminReports from "./pages/admin/AdminReports";
 
 const queryClient = new QueryClient();
 
@@ -50,19 +59,20 @@ const App = () => (
             {/* Patient Routes */}
             <Route element={<DashboardLayout />}>
               <Route path="/patient" element={<PatientDashboard />} />
-              <Route path="/patient/records" element={<PatientDashboard />} />
-              <Route path="/patient/prescriptions" element={<PatientDashboard />} />
-              <Route path="/patient/appointments" element={<PatientDashboard />} />
-              <Route path="/patient/health" element={<PatientDashboard />} />
-              <Route path="/patient/settings" element={<PatientDashboard />} />
+              <Route path="/patient/records" element={<PatientRecords />} />
+              <Route path="/patient/prescriptions" element={<PatientPrescriptions />} />
+              <Route path="/patient/appointments" element={<PatientAppointments />} />
+              <Route path="/patient/book-appointment" element={<BookAppointment />} />
+              <Route path="/patient/health" element={<PatientHealth />} />
+              <Route path="/patient/settings" element={<PatientSettings />} />
             </Route>
 
             {/* Pharmacist Routes */}
             <Route element={<DashboardLayout />}>
               <Route path="/pharmacist" element={<PharmacistDashboard />} />
-              <Route path="/pharmacist/verify" element={<PharmacistDashboard />} />
+              <Route path="/pharmacist/verify" element={<PharmacistVerify />} />
               <Route path="/pharmacist/dispensed" element={<PharmacistDashboard />} />
-              <Route path="/pharmacist/inventory" element={<PharmacistDashboard />} />
+              <Route path="/pharmacist/inventory" element={<PharmacistInventory />} />
               <Route path="/pharmacist/settings" element={<PharmacistDashboard />} />
             </Route>
 
@@ -74,7 +84,7 @@ const App = () => (
               <Route path="/admin/patients" element={<AdminDashboard />} />
               <Route path="/admin/pharmacists" element={<AdminDashboard />} />
               <Route path="/admin/clinics" element={<AdminDashboard />} />
-              <Route path="/admin/reports" element={<AdminDashboard />} />
+              <Route path="/admin/reports" element={<AdminReports />} />
               <Route path="/admin/settings" element={<AdminDashboard />} />
             </Route>
 
