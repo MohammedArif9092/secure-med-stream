@@ -83,7 +83,7 @@ const DashboardLayout: React.FC = () => {
   }
 
   const navItems = getNavItems(user.role);
-  const initials = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
+  const initials = (user.fullName || user.email || '').split(' ').map(n => n[0]).join('').toUpperCase();
 
   return (
     <div className="flex h-screen bg-background">
@@ -141,7 +141,7 @@ const DashboardLayout: React.FC = () => {
               </Avatar>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-sidebar-accent-foreground truncate">
-                  {user.name}
+                  {user.fullName || user.email}
                 </p>
                 <p className="text-xs text-sidebar-accent-foreground/60 capitalize">
                   {user.role}

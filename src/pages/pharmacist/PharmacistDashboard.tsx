@@ -101,7 +101,7 @@ const PharmacistDashboard: React.FC = () => {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold text-foreground">Pharmacy Dashboard</h1>
-          <p className="text-muted-foreground mt-1">Welcome back, {user?.name}</p>
+          <p className="text-muted-foreground mt-1">Welcome back, {user?.fullName || user?.email}</p>
         </div>
         <Button className="bg-gradient-primary" onClick={() => navigate('/pharmacist/inventory')}>
           <Package className="w-4 h-4 mr-2" />

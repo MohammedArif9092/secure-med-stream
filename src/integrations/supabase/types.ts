@@ -14,6 +14,126 @@ export type Database = {
   }
   public: {
     Tables: {
+      appointments: {
+        Row: {
+          appointment_date: string
+          appointment_time: string
+          created_at: string
+          doctor_id: string
+          id: string
+          notes: string | null
+          patient_id: string
+          reason: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          appointment_date: string
+          appointment_time: string
+          created_at?: string
+          doctor_id: string
+          id?: string
+          notes?: string | null
+          patient_id: string
+          reason?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          appointment_date?: string
+          appointment_time?: string
+          created_at?: string
+          doctor_id?: string
+          id?: string
+          notes?: string | null
+          patient_id?: string
+          reason?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      inventory: {
+        Row: {
+          batch_number: string | null
+          created_at: string
+          expiry_date: string | null
+          id: string
+          medication_name: string
+          minimum_stock: number | null
+          price: number | null
+          quantity: number
+          supplier: string | null
+          unit: string
+          updated_at: string
+        }
+        Insert: {
+          batch_number?: string | null
+          created_at?: string
+          expiry_date?: string | null
+          id?: string
+          medication_name: string
+          minimum_stock?: number | null
+          price?: number | null
+          quantity?: number
+          supplier?: string | null
+          unit: string
+          updated_at?: string
+        }
+        Update: {
+          batch_number?: string | null
+          created_at?: string
+          expiry_date?: string | null
+          id?: string
+          medication_name?: string
+          minimum_stock?: number | null
+          price?: number | null
+          quantity?: number
+          supplier?: string | null
+          unit?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      medical_records: {
+        Row: {
+          created_at: string
+          diagnosis: string
+          doctor_id: string
+          id: string
+          medications: string[] | null
+          patient_id: string
+          test_results: string | null
+          treatment: string | null
+          updated_at: string
+          visit_date: string
+        }
+        Insert: {
+          created_at?: string
+          diagnosis: string
+          doctor_id: string
+          id?: string
+          medications?: string[] | null
+          patient_id: string
+          test_results?: string | null
+          treatment?: string | null
+          updated_at?: string
+          visit_date: string
+        }
+        Update: {
+          created_at?: string
+          diagnosis?: string
+          doctor_id?: string
+          id?: string
+          medications?: string[] | null
+          patient_id?: string
+          test_results?: string | null
+          treatment?: string | null
+          updated_at?: string
+          visit_date?: string
+        }
+        Relationships: []
+      }
       patients: {
         Row: {
           address: string | null
@@ -58,6 +178,99 @@ export type Database = {
           name?: string
           patient_id?: string
           phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      prescriptions: {
+        Row: {
+          created_at: string
+          doctor_id: string
+          dosage: string
+          duration: string
+          expiry_date: string | null
+          frequency: string
+          id: string
+          medication_name: string
+          notes: string | null
+          patient_id: string
+          pharmacist_id: string | null
+          prescribed_date: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          doctor_id: string
+          dosage: string
+          duration: string
+          expiry_date?: string | null
+          frequency: string
+          id?: string
+          medication_name: string
+          notes?: string | null
+          patient_id: string
+          pharmacist_id?: string | null
+          prescribed_date?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          doctor_id?: string
+          dosage?: string
+          duration?: string
+          expiry_date?: string | null
+          frequency?: string
+          id?: string
+          medication_name?: string
+          notes?: string | null
+          patient_id?: string
+          pharmacist_id?: string | null
+          prescribed_date?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          clinic_id: string | null
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          is_approved: boolean | null
+          license_number: string | null
+          pharmacy_id: string | null
+          phone: string | null
+          role: string
+          updated_at: string
+        }
+        Insert: {
+          clinic_id?: string | null
+          created_at?: string
+          email: string
+          full_name: string
+          id: string
+          is_approved?: boolean | null
+          license_number?: string | null
+          pharmacy_id?: string | null
+          phone?: string | null
+          role: string
+          updated_at?: string
+        }
+        Update: {
+          clinic_id?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          is_approved?: boolean | null
+          license_number?: string | null
+          pharmacy_id?: string | null
+          phone?: string | null
+          role?: string
           updated_at?: string
         }
         Relationships: []

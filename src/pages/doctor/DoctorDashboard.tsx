@@ -34,7 +34,7 @@ const DoctorDashboard: React.FC = () => {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Welcome back, {user?.name}</h1>
+          <h1 className="text-3xl font-bold text-foreground">Welcome back, {user?.fullName || user?.email}</h1>
           <p className="text-muted-foreground mt-1">Here's your overview for today</p>
         </div>
         <Button className="bg-gradient-primary" onClick={() => navigate('/doctor/patients')}>

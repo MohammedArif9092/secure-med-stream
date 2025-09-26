@@ -1,64 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
-import { UserRole } from '@/types/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Stethoscope, Users, Pill, Shield, Info } from 'lucide-react';
+import { Stethoscope, Users, Pill, Shield, AlertCircle } from 'lucide-react';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
-  const [role, setRole] = useState<UserRole>('patient');
+  const { login, signup, session } = useAuth();
+  const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [role, setRole] = useState('patient');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleLogin = async (e: React.FormEvent) => {
+  useEffect(() => {
+    if (session) {
+      navigate('/');
+    }
+  }, [session, navigate]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
 
     try {
-      await login(email, password, role);
-      // Navigate based on role
-      switch (role) {
-        case 'patient':
-          navigate('/patient');
-          break;
-        case 'doctor':
-          navigate('/doctor');
-          break;
-        case 'pharmacist':
-          navigate('/pharmacist');
-          break;
-        case 'admin':
-          navigate('/admin');
-          break;
+      if (isSignUp) {
+        await signup(email, password, fullName, role);
+        setError('');
+      } else {
+        await login(email, password);
       }
-    } catch (err) {
-      setError('Invalid credentials. Please try again.');
+    } catch (err: any) {
+      setError(err.message || 'An error occurred. Please try again.');
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const demoCredentials = {
-    patient: { email: 'patient@demo.com', password: 'patient123' },
-    doctor: { email: 'doctor@demo.com', password: 'doctor123' },
-    pharmacist: { email: 'pharmacist@demo.com', password: 'pharmacist123' },
-    admin: { email: 'admin@demo.com', password: 'admin123' },
-  };
-
-  const setDemoCredentials = () => {
-    const creds = demoCredentials[role];
-    setEmail(creds.email);
-    setPassword(creds.password);
   };
 
   return (
@@ -74,96 +58,123 @@ const Login: React.FC = () => {
 
         <Card className="shadow-medical">
           <CardHeader>
-            <CardTitle>Sign In</CardTitle>
-            <CardDescription>Access your medical dashboard</CardDescription>
+            <CardTitle>{isSignUp ? 'Create Account' : 'Sign In'}</CardTitle>
+            <CardDescription>
+              {isSignUp ? 'Register for a new account' : 'Access your medical dashboard'}
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <Tabs value={role} onValueChange={(v) => setRole(v as UserRole)}>
-              <TabsList className="grid w-full grid-cols-4">
-                <TabsTrigger value="patient" className="gap-1">
-                  <Users className="w-4 h-4" />
-                  Patient
-                </TabsTrigger>
-                <TabsTrigger value="doctor" className="gap-1">
-                  <Stethoscope className="w-4 h-4" />
-                  Doctor
-                </TabsTrigger>
-                <TabsTrigger value="pharmacist" className="gap-1">
-                  <Pill className="w-4 h-4" />
-                  Pharmacist
-                </TabsTrigger>
-                <TabsTrigger value="admin" className="gap-1">
-                  <Shield className="w-4 h-4" />
-                  Admin
-                </TabsTrigger>
-              </TabsList>
+            <div className="space-y-4">
+              {isSignUp && (
+                <Tabs value={role} onValueChange={setRole}>
+                  <TabsList className="grid w-full grid-cols-4">
+                    <TabsTrigger value="patient" className="gap-1">
+                      <Users className="w-4 h-4" />
+                      Patient
+                    </TabsTrigger>
+                    <TabsTrigger value="doctor" className="gap-1">
+                      <Stethoscope className="w-4 h-4" />
+                      Doctor
+                    </TabsTrigger>
+                    <TabsTrigger value="pharmacist" className="gap-1">
+                      <Pill className="w-4 h-4" />
+                      Pharmacist
+                    </TabsTrigger>
+                    <TabsTrigger value="admin" className="gap-1">
+                      <Shield className="w-4 h-4" />
+                      Admin
+                    </TabsTrigger>
+                  </TabsList>
+                </Tabs>
+              )}
 
-              <TabsContent value={role} className="space-y-4">
-                <Alert className="bg-primary-light border-primary">
-                  <Info className="h-4 w-4 text-primary" />
-                  <AlertDescription className="text-sm">
-                    <strong>Demo Credentials:</strong><br />
-                    Email: {demoCredentials[role].email}<br />
-                    Password: {demoCredentials[role].password}
-                  </AlertDescription>
-                </Alert>
-
-                <form onSubmit={handleLogin} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {isSignUp && (
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="fullName">Full Name</Label>
                     <Input
-                      id="email"
-                      type="email"
-                      placeholder="Enter your email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      id="fullName"
+                      type="text"
+                      placeholder="Enter your full name"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
                       required
                     />
                   </div>
+                )}
 
-                  <div className="space-y-2">
-                    <Label htmlFor="password">Password</Label>
-                    <Input
-                      id="password"
-                      type="password"
-                      placeholder="Enter your password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                    />
-                  </div>
-
-                  {error && (
-                    <Alert variant="destructive">
-                      <AlertDescription>{error}</AlertDescription>
-                    </Alert>
-                  )}
-
-                  <div className="space-y-2">
-                    <Button
-                      type="submit"
-                      className="w-full bg-gradient-primary hover:opacity-90"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? 'Signing in...' : 'Sign In'}
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      className="w-full"
-                      onClick={setDemoCredentials}
-                    >
-                      Use Demo Credentials
-                    </Button>
-                  </div>
-                </form>
-
-                <div className="text-center text-sm text-muted-foreground">
-                  <p>Don't have an account? <a href="#" className="text-primary hover:underline">Register</a></p>
-                  <p className="mt-1">Forgot password? <a href="#" className="text-primary hover:underline">Reset</a></p>
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
                 </div>
-              </TabsContent>
-            </Tabs>
+
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+
+                {error && (
+                  <Alert variant="destructive">
+                    <AlertCircle className="h-4 w-4" />
+                    <AlertDescription>{error}</AlertDescription>
+                  </Alert>
+                )}
+
+                <div className="space-y-2">
+                  <Button
+                    type="submit"
+                    className="w-full bg-gradient-primary hover:opacity-90"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (isSignUp ? 'Creating Account...' : 'Signing in...') : (isSignUp ? 'Create Account' : 'Sign In')}
+                  </Button>
+                </div>
+              </form>
+
+              <div className="text-center text-sm text-muted-foreground">
+                {isSignUp ? (
+                  <p>
+                    Already have an account?{' '}
+                    <button
+                      onClick={() => {
+                        setIsSignUp(false);
+                        setError('');
+                      }}
+                      className="text-primary hover:underline"
+                    >
+                      Sign In
+                    </button>
+                  </p>
+                ) : (
+                  <p>
+                    Don't have an account?{' '}
+                    <button
+                      onClick={() => {
+                        setIsSignUp(true);
+                        setError('');
+                      }}
+                      className="text-primary hover:underline"
+                    >
+                      Register
+                    </button>
+                  </p>
+                )}
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>
