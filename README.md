@@ -1,73 +1,94 @@
-# Welcome to your Lovable project
+🏥 MediCare Portal
+Secure Medical History Management Platform
+📌 Project Overview
 
-## Project info
+MediCare Portal is a centralized and secure medical record management system designed to bridge the gap between healthcare providers and patients.
+The platform enables Doctors, Patients, Pharmacists, and Admins to securely access, update, and manage medical histories through role-based dashboards.
 
-**URL**: https://lovable.dev/projects/66eb039d-c509-4bb1-bd1a-176bcb983772
+Built for the TechSprint AI Hackathon, this project focuses on healthcare digitization, data security, and scalable architecture.
+🚀 Key Features
+🔐 Unified Authentication & Security
 
-## How can I edit this code?
+OTP-Based Login
+Secure mobile-based authentication for all users.
 
-There are several ways of editing your application.
+Role-Based Access Control (RBAC)
+Customized dashboards for Doctors, Patients, Pharmacists, and Admins.
 
-**Use Lovable**
+Manual Verification
+Admin approval required for Doctors and Pharmacists after registration to ensure authenticity and system integrity.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/66eb039d-c509-4bb1-bd1a-176bcb983772) and start prompting.
+🩺 Role-Specific Functionalities
+👨‍⚕️ Doctor Portal
 
-Changes made via Lovable will be committed automatically to this repo.
+Medical license validation form
 
-**Use your preferred IDE**
+Structured prescription builder
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Access to last 6 months of patient reports:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Lab reports
 
-Follow these steps:
+Scan results
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+MRI reports
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+👤 Patient Portal
 
-# Step 3: Install the necessary dependencies.
-npm i
+View complete medical history
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+Track diagnostic test results
 
-**Edit a file directly in GitHub**
+Download prescriptions as watermarked PDFs
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+💊 Pharmacist Portal
 
-**Use GitHub Codespaces**
+Verify prescriptions using Patient ID
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Access digital prescription details for accurate medication dispensing
 
-## What technologies are used for this project?
+🛠️ Admin Panel
 
-This project is built with:
+Approve / reject doctor and pharmacist accounts
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Manage clinics and system users
 
-## How can I deploy this project?
+Monitor system logs and analytics
 
-Simply open [Lovable](https://lovable.dev/projects/66eb039d-c509-4bb1-bd1a-176bcb983772) and click on Share -> Publish.
+🗄️ Data Management & Archiving
 
-## Can I connect a custom domain to my Lovable project?
+Hot / Cold Storage Strategy
+Medical records older than 6 months are automatically archived to maintain system performance.
 
-Yes, you can!
+Historical Data Requests
+Doctors can request access to archived records through system logic or admin approval.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+🛠️ Technical Stack
+Component	Technology
+Frontend	React.js / Vue.js
+Backend	Node.js with Express
+Database	PostgreSQL
+Authentication	Firebase Auth / Twilio OTP
+Storage	Firebase Storage / AWS S3
+Documentation	jsPDF / Puppeteer
+🔒 Security Highlights
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+OTP-based authentication
+
+Role-based access control
+
+Admin-level verification
+
+Secure cloud storage
+
+Watermarked medical documents
+
+📈 Scalability & Performance
+
+Modular backend architecture
+
+Hot/Cold data archiving strategy
+
+Cloud-based storage and authentication
+
+Designed for future AI-driven health analytics
