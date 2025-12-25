@@ -9,6 +9,7 @@ The platform enables Doctors, Patients, Pharmacists, and Admins to securely acce
 Built for the TechSprint AI Hackathon, this project focuses on healthcare digitization, data security, and scalable architecture.
 
 🚀 Key Features
+
 🔐 Unified Authentication & Security
 
 OTP-Based Login
@@ -21,6 +22,7 @@ Manual Verification
 Admin approval required for Doctors and Pharmacists after registration to ensure authenticity and system integrity.
 
 🩺 Role-Specific Functionalities
+
 👨‍⚕️ Doctor Portal
 
 Medical license validation form
@@ -66,6 +68,7 @@ Historical Data Requests
 Doctors can request access to archived records through system logic or admin approval.
 
 🛠️ Technical Stack
+
 Component	Technology
 Frontend	React.js / Vue.js
 Backend	Node.js with Express
@@ -73,6 +76,7 @@ Database	PostgreSQL
 Authentication	Firebase Auth / Twilio OTP
 Storage	Firebase Storage / AWS S3
 Documentation	jsPDF / Puppeteer
+
 🔒 Security Highlights
 
 OTP-based authentication
