@@ -1,11 +1,13 @@
 🏥 MediCare Portal
 Secure Medical History Management Platform
+
 📌 Project Overview
 
 MediCare Portal is a centralized and secure medical record management system designed to bridge the gap between healthcare providers and patients.
 The platform enables Doctors, Patients, Pharmacists, and Admins to securely access, update, and manage medical histories through role-based dashboards.
 
 Built for the TechSprint AI Hackathon, this project focuses on healthcare digitization, data security, and scalable architecture.
+
 🚀 Key Features
 🔐 Unified Authentication & Security
 
